@@ -33,7 +33,6 @@ $ fisp release -d output
 
 从[这里](https://github.com/wangcheng714/fis-plus-lsidff-plugin)下载支持增量更新的Smarty插件，替换本地的plugin。
 
-
 ### [3]升级新版组件加载类库modjs
 
 从[这里](https://github.com/2betop/mod/mod-ls.js)下载新版支持增量更新的组件类库，替换本地mod.js。
