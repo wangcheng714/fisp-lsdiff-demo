@@ -8,3 +8,9 @@ fis.config.merge({
         'static/pkg/aio.js' : 'widget/nav/**.js'
     }
 });
+
+fis.config.get("roadmap.path").unshift({
+    reg : /\/lsdiff\-plugin\/(plugin\/.*\.php)$/i,
+    release : '/$1'
+});
+
