@@ -1,7 +1,7 @@
 fis.config.merge({
     namespace : 'home',
     modules : {
-        "postpackager" : "lsdiff-map"
+        postpackager : "lsdiff-map"
     },
     pack : {
         'static/pkg/aio.css' : [
