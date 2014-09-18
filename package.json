@@ -1,0 +1,16 @@
+{
+  "name": "fisp-lsdiff-demo",
+  "version": "0.0.1",
+  "description": "fis-plus localStorage diff demo",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "fis",
+    "fis-plus",
+    "localStorage",
+    "demo"
+  ],
+  "author": "wangcheng714@gmail.com",
+  "license": "MIT"
+}
