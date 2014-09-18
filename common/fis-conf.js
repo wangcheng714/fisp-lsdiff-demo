@@ -14,3 +14,12 @@ fis.config.get("roadmap.path").unshift({
     release : '/$1'
 });
 
+fis.config.get("roadmap.path").unshift({
+    reg : "lsdiff-backend/**",
+    release : false
+});
+
+fis.config.get("roadmap.path").unshift({
+    reg : /lsdiff\-backend\/ls\-diff\.php/i,
+    release : '/config/ls-diff.php'
+});
