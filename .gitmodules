@@ -4,6 +4,3 @@
 [submodule "common/lsdiff-backend"]
 	path = common/lsdiff-backend
 	url = https://github.com/wangcheng714/fis-localstorage-php-backend.git
-[submodule "common/fis-plus-lsidff-plugin"]
-	path = common/fis-plus-lsidff-plugin
-	url = https://github.com/wangcheng714/fis-plus-lsidff-plugin.git
