@@ -1,6 +1,3 @@
-[submodule "common/lsdiff-plugin"]
-	path = common/lsdiff-plugin
-	url = https://github.com/wangcheng714/fis-plus-lsidff-plugin.git
 [submodule "common/static/mod"]
 	path = common/static/mod
 	url = https://github.com/2betop/mod
