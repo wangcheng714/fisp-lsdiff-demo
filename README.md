@@ -100,4 +100,24 @@ $ fisp release -cmpr common
 $ fisp release -cmpr home
 ```
 
+
+## 使用说明
+
+### 关于统计和收益
+
+增量更新方案在运行中会统计一些请求、下载相关的数据，用以衡量方案对整体项目带来的收益。
+
+统计前需要设置如下配置：
+
+    {%html fid="" sampleRate=%}
+    //fid 产品线在fis中的id,如没有请咨询Fis小组
+    //sampleRate 统计的采样率，默认为0，必须设置。 sampleRate=0.001 采样率为千分之一
+    
+如果你还不了解{html}是神马，请移步[这里](http://oak.baidu.com/docs/fis-plus/user/smarty-plugin.html#html)
+
+想进一步了解统计那些数据、如何衡量、怎么展现请参考[这里](http://fe.baidu.com/doc/oak/docs/framework/localStorage-diff.text#统计与收益)。
+
+### 关于Css增量更新
+
+### 关于调试
 	
