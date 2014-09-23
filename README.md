@@ -28,8 +28,11 @@ $ fisp release -cmpr photo
         1. 查看network首次请求和第二次请求，发送的请求数和请求内容
         2. 查看localStorage存贮的内容
         3. 清空localStorage重新请求页面查看请求
+        4. 试着修改一个静态资源文件，重新发布，刷新页面查看请求效果
 
 ## 接入指导
+
+下面是介绍已有产品线如何接入增量更新方案：
 
 ### [1]接入fis-postpackager-lsdiff-map插件
 

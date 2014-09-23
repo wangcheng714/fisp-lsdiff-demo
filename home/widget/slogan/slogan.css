@@ -3,6 +3,10 @@
  * @require ../section/section.css
  */
 
+body{
+    color: red;
+}
+
 #slogan {
     background: #555 url(landscape.jpg) repeat-x;
     background-size: 100% 100%;
