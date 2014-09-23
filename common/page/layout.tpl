@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {%* 使用html插件替换普通html标签，同时注册JS组件化库 *%}
-{%html framework="common:static/mod/mod-ls.js" class="expanded"%}
+{%html framework="common:static/mod/mod-ls.js" class="expanded" cssDiff=true%}
     {%* 使用head插件替换head标签，主要为控制加载同步静态资源使用 *%}
 	{%head%}
 	    <meta charset="utf-8"/>
