@@ -3,7 +3,31 @@ fisp-lsdiff-demo
 
 ## Demo Getting Start
 
+### 下载Demo
 
+```sh
+$ git clone https://github.com/wangcheng714/fisp-lsdiff-demo.git
+$ cd fisp-lsdiff-demo
+$ git submodule init
+$ git submodule update
+```
+
+关于[git submodule](http://git-scm.com/docs/git-submodule)可以参考这里。
+
+### 运行Demo
+
+```sh
+$ fisp release -cmpr common
+$ fisp release -cmpr photo
+```
+
+### 查看效果
+
+* 浏览页面http://127.0.0.1:8080/查看效果
+
+        1. 查看network首次请求和第二次请求，发送的请求数和请求内容
+        2. 查看localStorage存贮的内容
+        3. 清空localStorage重新请求页面查看请求
 
 ## 接入指导
 
