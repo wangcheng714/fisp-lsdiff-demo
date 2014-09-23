@@ -18,7 +18,9 @@ $ git submodule update
 
 ```sh
 $ fisp release -cmpr common
-$ fisp release -cmpr photo
+$ fisp release -cmpr home
+$ fisp server init
+$ fisp server start
 ```
 
 ### 查看效果
@@ -121,3 +123,9 @@ $ fisp release -cmpr home
 
 ### 关于调试
 	
+默认的资源加载通过Ajax增量更新，通过Script内嵌到页面不方便功能调试，因此提供了通过Script、Link(src)的方式请求单独的包或者文件的方案。
+
+使用方法 ： 请求页面是添加debug参数
+ 
+    /home/index?debug=pkg  //通过资源包加载文件
+    /home/index?debug=file //通过单独文件独立加载
