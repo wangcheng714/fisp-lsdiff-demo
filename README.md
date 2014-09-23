@@ -31,6 +31,15 @@ $ fisp server start
         2. 查看localStorage存贮的内容
         3. 清空localStorage重新请求页面查看请求
         4. 试着修改一个静态资源文件，重新发布，刷新页面查看请求效果
+        
+* 页面闪了一下？
+
+这是因为css也采用了增量更新的方式(异步加载)，导致页面重绘出现闪屏。对此我们也支持css的不同加载方案。
+修改common模块"page/layout.tpl"
+
+    删除 cssDiff=true
+    
+重新发布预览可以看到一切正常了。详细信息参考下面css增量更新。
 
 ## 接入指导
 
@@ -121,6 +130,12 @@ $ fisp release -cmpr home
 
 ### 关于Css增量更新
 
+css默认没有采用增量更新方案，而是通过link全量更新。主要是css的异步加载会带来页面加载初始闪屏的问题。
+当然你也可以通过加载进度指示条，延迟渲染来解决，实现css异步加载。开启方式:
+
+    {%html cssDiff=true%}
+    //开启css异步加载
+
 ### 关于调试
 	
 默认的资源加载通过Ajax增量更新，通过Script内嵌到页面不方便功能调试，因此提供了通过Script、Link(src)的方式请求单独的包或者文件的方案。
@@ -129,3 +144,4 @@ $ fisp release -cmpr home
  
     /home/index?debug=pkg  //通过资源包加载文件
     /home/index?debug=file //通过单独文件独立加载
+
