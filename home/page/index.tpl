@@ -26,6 +26,22 @@
                     data=$doc index=$index
                 %}
             {%/foreach%}
+            {%widget name="home:widget/big/big.tpl"%}
+            {%*widget name="home:widget/big1/big1.tpl"*%}
+            {%*widget name="home:widget/big2/big2.tpl"*%}
+            {%*widget name="home:widget/big3/big3.tpl"*%}
+            {%*widget name="home:widget/big4/big4.tpl"*%}
+            {%*widget name="home:widget/big5/big5.tpl"*%}
+            {%*widget name="home:widget/big6/big6.tpl"*%}
+            {%*widget name="home:widget/big7/big7.tpl"*%}
+            {%*widget name="home:widget/big8/big8.tpl"*%}
+            {%*widget name="home:widget/big9/big9.tpl"*%}
+            {%*widget name="home:widget/big10/big10.tpl"*%}
+            {%*widget name="home:widget/big11/big11.tpl"*%}
+            {%*widget name="home:widget/big12/big12.tpl"*%}
+            {%*widget name="home:widget/big13/big13.tpl"*%}
+            {%*widget name="home:widget/big14/big14.tpl"*%}
+            {%*widget name="home:widget/big15/big15.tpl"*%}
         </div>
     </div>
     {%require name="home:static/index/index.css"%}

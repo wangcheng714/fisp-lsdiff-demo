@@ -3,6 +3,8 @@
 {%html framework="common:static/mod/mod-ls.js" class="expanded" cssDiff=true%}
     {%* 使用head插件替换head标签，主要为控制加载同步静态资源使用 *%}
 	{%head%}
+	    {%require name="common:static/lib/jquery.js"%}
+	    {%require name="common:static/lib/tangram.js"%}
 	    <meta charset="utf-8"/>
     	<meta content="{%$description%}" name="description">
     	<title>{%$title%}</title>

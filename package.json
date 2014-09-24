@@ -12,5 +12,8 @@
     "demo"
   ],
   "author": "wangcheng714@gmail.com",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^0.12.0"
+  }
 }

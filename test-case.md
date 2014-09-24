@@ -9,6 +9,8 @@
     通过script、style标签单独请求
     
 * 针对require.async异步调用的场景能正常运行
+* 检测gzip是否开启，是否生效
 * localStorage禁用、存满情况测试确认
 * 不打包，单文件有超过500个确认localStorage是否会报错
 * js和css大小超过2M确认是否有问题
+
