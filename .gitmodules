@@ -1,6 +1,3 @@
-[submodule "common/static/mod"]
-	path = common/static/mod
-	url = https://github.com/2betop/mod
 [submodule "common/lsdiff-backend"]
 	path = common/lsdiff-backend
 	url = https://github.com/wangcheng714/fis-localstorage-php-backend.git
