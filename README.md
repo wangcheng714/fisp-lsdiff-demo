@@ -1,155 +1,56 @@
-fisp-lsdiff-demo
+Fis静态资源增量更新项目
 ================
 
-## Demo Getting Start
+## 静态资源增量更新
 
-### 下载Demo
+### 背景
 
-```sh
-$ git clone https://github.com/wangcheng714/fisp-lsdiff-demo.git
-$ cd fisp-lsdiff-demo
-$ git submodule init
-$ git submodule update
-```
+根据Steve Souders的性能优化14条准则(什么！你还不知道赶紧[恶补吧](http://developer.51cto.com/art/201207/347525.htm))，攻城师们每次在代码发布上线前都会做一下几件事：
 
-关于[git submodule](http://git-scm.com/docs/git-submodule)可以参考这里。
+1. js打包合并到一起、css打包到一起
+2. 合并后的资源利用压缩工具自动压缩
+3. 打包后的静态资源添加时间戳，高端一点的可能添加内容的MD5戳，开启服务器端永久缓存
 
-### 运行Demo
+资源合并减少了请求书、资源添加时间戳、MD5戳可以开启资源缓存，一切看起来都如此的美好。理想永远都是丰满的，现实确实骨感的。直到后来时间大家发现当我们需要频繁上线时一系列的问题就来了：
 
-```sh
-$ fisp release -cmpr common
-$ fisp release -cmpr home
-$ fisp server init
-$ fisp server start
-```
+1. 如果上线有新增加、删除文件我们每次都需要修改资源合并配置(假设你使用的是grunt、gulp等编译工具)
+2. 资源合并到一起是很好，但是在持续集成、快速迭代中细微修改都会使整个文件缓存失效，尤其是移动端浪费流量、页面加载速度慢用户体验就更差了
 
-### 查看效果
+为了解决这些问题我们提出了两个新的解决方案：
 
-* 浏览页面http://127.0.0.1:8080/查看效果
+静态资源自动合并方案、静态资源增量更新方案。下面主要给大家介绍静态资源增量更新方案，
+插播广告静态资源自动合并方案是一个很NB的自动化方案，它解决了很多你现在遇到的，将来可能遇到的问题，这里附上[传送门](https://github.com/wangcheng714/fis-auto-packager).
 
-        1. 查看network首次请求和第二次请求，发送的请求数和请求内容
-        2. 查看localStorage存贮的内容
-        3. 清空localStorage重新请求页面查看请求
-        4. 试着修改一个静态资源文件，重新发布，刷新页面查看请求效果
-        
-* 页面闪了一下？
+### 介绍
 
-这是因为css也采用了增量更新的方式(异步加载)，导致页面重绘出现闪屏。对此我们也支持css的不同加载方案。
-修改common模块"page/layout.tpl"
+静态资源增量更新是一种新的静态资源缓存方案，它的核心思想通过Ajax请求取代传统的Script和Link加载静态资源，并将静态资源存贮与localStorage中。
+每次请求页面时先对比服务器最新资源和localStorage的文件(合并前的小文件)差异,通过Ajax更新修改的小文件，并更新localStorage内容，插入到页面。
 
-    删除 cssDiff=true
-    
-重新发布预览可以看到一切正常了。详细信息参考下面css增量更新。
+增量更新方案的优点：
 
-## 接入指导
+* 减少不必要的请求，只在有更新时再发送请求
+* 增量更新资源，节省大量带宽，移动端优化效果更加明显
 
-下面是介绍已有产品线如何接入增量更新方案：
+### 适用场景
 
-### [1]接入fis-postpackager-lsdiff-map插件
+增量更新方案可以应用于所有的前端项目中，但对于一下场景优化效果将会更加明显
 
-* 安装插件
+* 对于快速迭代、上线比较多的产品线
+* 对于慢网速环境，对于外国网络、移动端尤其适用
 
-```sh
-$ npm install -g fis-postpackager-lsdiff-map
-```
+## 使用文档
 
-* 使用插件
+* 如果你没有使用过Fis参考[这里]()
+* 如果你有Fisp的项目参考[这里]()
 
-fis-config.js中增加如下配置
+## 设计
 
-	fis.config.merge({
-		modules : {
-			postpackager : "lsdiff-map"
-		}
-	});
-	
-* 确认效果
+[总体设计文档](./doc/localStorage-diff.md)
 
-```sh
-$ fisp release -d output
-```
+[详细设计文档](./doc/localStorage-diff-design.md)
 
-会在output/config目录中生成module.lslist.json和module.lsdata.json文件。
+## 其他
 
-### [2]升级新版Smarty插件
+### 和Manifest的结合
 
-从[这里](https://github.com/wangcheng714/fis-plus-lsidff-plugin)下载支持增量更新的Smarty插件，替换本地的plugin。
-
-### [3]升级新版组件加载类库modjs
-
-从[这里](https://github.com/2betop/mod/mod-ls.js)下载新版支持增量更新的组件类库，替换本地mod.js。
-
-### [4]配置增量更新请求
-
-* 首先你需要下载提供增量更新服务的后端文件ls-diff.php
-
-从[这里](https://github.com/wangcheng714/fis-localstorage-php-backend)下载ls-diff.php文件，部署到模块中(建议common模块)。
-
-配置fis-config.js，讲ls-diff.php发布到config目录.具体配置参考下面：
-
-	fis.config.get("roadmap.path").unshift({
-		reg : /lsdiff\-backend\/ls\-diff\.php/i,
-		release : '/config/ls-diff.php'
-	});
-
-* 其次你需要配置服务器将前端更新请求转发到该文件。
-
-对于Fis本地调试：server.conf增加如下配置
-
-	rewrite \/fis-diff /config/ls-diff.php
-		
-对于线上服务：
-
-	如果你是apache服务器
-	
-### [5]Finish
-
-至此我们已经完成了接入增量更新方案的所有操作。编译看看效果吧。
-
-```sh
-$ fisp release -cmpr common
-$ fisp release -cmpr home
-```
-
-
-## 使用说明
-
-### 关于统计和收益
-
-增量更新方案在运行中会统计一些请求、下载相关的数据，用以衡量方案对整体项目带来的收益。
-
-统计前需要设置如下配置：
-
-    {%html fid="" sampleRate=%}
-    //fid 产品线在fis中的id,如没有请咨询Fis小组
-    //sampleRate 统计的采样率，默认为0，必须设置。 sampleRate=0.001 采样率为千分之一
-    
-如果你还不了解{html}是神马，请移步[这里](http://oak.baidu.com/docs/fis-plus/user/smarty-plugin.html#html)
-
-想进一步了解统计那些数据、如何衡量、怎么展现请参考[这里](http://fe.baidu.com/doc/oak/docs/framework/localStorage-diff.text#统计与收益)。
-
-### 关于Css增量更新
-
-css默认没有采用增量更新方案，而是通过link全量更新。主要是css的异步加载会带来页面加载初始闪屏的问题。
-当然你也可以通过加载进度指示条，延迟渲染来解决，实现css异步加载。开启方式:
-
-    {%html cssDiff=true%}
-    //开启css异步加载
-
-### 关于调试
-	
-默认的资源加载通过Ajax增量更新，通过Script内嵌到页面不方便功能调试，因此提供了通过Script、Link(src)的方式请求单独的包或者文件的方案。
-
-使用方法 ： 请求页面是添加debug参数
- 
-    /home/index?debug=pkg  //通过资源包加载文件
-    /home/index?debug=file //通过单独文件独立加载
-
-
-## FAQ
-
-### 如果静态资源文件很多，内容很大，全部内嵌到页面会导致页面挂掉么？
-
-经测试确认文件多(500个)，内容大(5M)，全都内嵌到页面也没有问题。localStorage存满后会单独请求缺失的内容，不会影响正常功能。
-
-详细的测试案例参考[这里](./tools/readme.md)
+**后续补充详细方案**
