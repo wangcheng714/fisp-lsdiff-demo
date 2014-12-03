@@ -21,7 +21,7 @@
 
 ## 模块设计
 
-模块设计包括以下几部分：前端框架、后端资源更新服务以及其他包括调试、统计等部分。
+模块设计包括以下几部分：[前端框架](https://github.com/fex-team/mod)、[后端资源更新服务](https://github.com/wangcheng714/fis-localstorage-php-backend)以及其他包括调试、统计等部分。
 
 下面大概描述了每个模块的功能作用，详细设计[参考这里](./localStorage-diff-design.text)
 

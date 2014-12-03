@@ -40,8 +40,8 @@ Fis静态资源增量更新项目
 
 ## 使用文档
 
-* 如果你没有使用过Fis参考[这里]()
-* 如果你有Fisp的项目参考[这里]()
+* 如果你没有使用过Fis参考[这里](https://github.com/wangcheng714/fisp-lsdiff-demo/blob/master/doc/usage.md#demo-getting-start)
+* 如果你有Fisp的项目参考[这里](https://github.com/wangcheng714/fisp-lsdiff-demo/blob/master/doc/usage.md#%E6%8E%A5%E5%85%A5%E6%8C%87%E5%AF%BC)
 
 ## 设计
 
